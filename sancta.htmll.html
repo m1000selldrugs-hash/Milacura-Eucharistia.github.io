@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Milagres Eucarísticos | Presença Real de Cristo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'cinzel': ['Cinzel', 'serif'],
+                        'playfair': ['Playfair Display', 'serif'],
+                        'lato': ['Lato', 'sans-serif'],
+                    },
+                    colors: {
+                        'gold': '#D4AF37',
+                        'gold-light': '#F4E4C1',
+                        'burgundy': '#800020',
+                        'burgundy-dark': '#4A0012',
+                        'cream': '#FDF5E6',
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                        'fade-in': 'fadeIn 1s ease-out',
+                        'slide-up': 'slideUp 0.8s ease-out',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        glow: {
+                            '0%': { boxShadow: '0 0 5px #D4AF37' },
+                            '100%': { boxShadow: '0 0 20px #D4AF37, 0 0 40px #D4AF37' },
+                        },
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(50px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #0a0a0a;
+            color: #FDF5E6;
+            overflow-x: hidden;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #D4AF37 0%, #F4E4C1 50%, #D4AF37 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        
+        .holy-card {
+            background: linear-gradient(135deg, rgba(128, 0, 32, 0.1) 0%, rgba(0, 0, 0, 0.8) 100%);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            transition: all 0.4s ease;
+        }
+        
+        .holy-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(212, 175, 55, 0.3);
+            border-color: #D4AF37;
+        }
+        
+        .image-reliquary {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .image-reliquary::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent 30%, rgba(212, 175, 55, 0.3) 50%, transparent 70%);
+            transform: rotate(45deg);
+            transition: all 0.6s;
+            opacity: 0;
+        }
+        
+        .image-reliquary:hover::before {
+            animation: shine 0.6s ease-in-out;
+        }
+        
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); opacity: 0; }
+        }
+        
+        .particle {
+            position: absolute;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.8) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        
+        .tab-active {
+            background: linear-gradient(90deg, #800020 0%, #4A0012 100%);
+            border-bottom: 3px solid #D4AF37;
+        }
+        
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        
+        .scroll-reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .ornament {
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 10 Q 25 0, 50 10 T 100 10' stroke='%23D4AF37' fill='none' stroke-width='1'/%3E%3C/svg%3E");
+            background-repeat: repeat-x;
+            height: 20px;
+            opacity: 0.5;
+        }
+    </style>
+</head>
+<body class="font-lato antialiased">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-black/90 backdrop-blur-md border-b border-gold/20 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center space-x-3">
+                    <i class="fas fa-cross text-gold text-2xl animate-glow"></i>
+                    <span class="font-cinzel text-xl font-bold text-gold tracking-wider">SANTÍSSIMO SACRAMENTO</span>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#inicio" class="text-gold-light hover:text-gold transition-colors font-cinzel text-sm tracking-widest">INÍCIO</a>
+                    <a href="#milagres" class="text-gold-light hover:text-gold transition-colors font-cinzel text-sm tracking-widest">MILAGRES</a>
+                    <a href="#ciencia" class="text-gold-light hover:text-gold transition-colors font-cinzel text-sm tracking-widest">CIÊNCIA</a>
+                    <a href="#galeria" class="text-gold-light hover:text-gold transition-colors font-cinzel text-sm tracking-widest">GALERIA</a>
+                </div>
+                <button class="md:hidden text-gold text-2xl" onclick="toggleMenu()">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-black/95 border-t border-gold/20">
+            <div class="px-4 pt-2 pb-6 space-y-2">
+                <a href="#inicio" class="block px-3 py-2 text-gold-light hover:text-gold font-cinzel">INÍCIO</a>
+                <a href="#milagres" class="block px-3 py-2 text-gold-light hover:text-gold font-cinzel">MILAGRES</a>
+                <a href="#ciencia" class="block px-3 py-2 text-gold-light hover:text-gold font-cinzel">CIÊNCIA</a>
+                <a href="#galeria" class="block px-3 py-2 text-gold-light hover:text-gold font-cinzel">GALERIA</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="relative min-h-screen flex items-center justify-center overflow-hidden">
+        <!-- Background Effects -->
+        <div class="absolute inset-0 bg-gradient-to-b from-black via-burgundy-dark/20 to-black"></div>
+        <div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(circle at 50% 50%, #800020 0%, transparent 70%);"></div>
+        
+        <!-- Floating Particles -->
+        <div id="particles" class="absolute inset-0 pointer-events-none"></div>
+
+        <div class="relative z-10 text-center px-4 max-w-5xl mx-auto">
+            <div class="mb-6 animate-fade-in">
+                <i class="fas fa-sun text-gold text-5xl mb-4 animate-float"></i>
+            </div>
+            <h1 class="font-cinzel text-5xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight animate-slide-up">
+                <span class="gradient-text">Milagres</span><br>
+                <span class="text-cream">Eucarísticos</span>
+            </h1>
+            <div class="ornament w-64 mx-auto mb-8"></div>
+            <p class="font-playfair text-xl md:text-2xl text-gold-light/90 mb-8 max-w-3xl mx-auto italic animate-slide-up" style="animation-delay: 0.2s">
+                "Eu sou o pão vivo que desceu do céu. Se alguém comer deste pão, viverá eternamente. 
+                E o pão que eu der é a minha carne, que entrego pela vida do mundo."
+            </p>
+            <p class="text-gold/70 text-lg mb-12 font-cinzel tracking-widest animate-slide-up" style="animation-delay: 0.4s">João 6:51</p>
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-center animate-slide-up" style="animation-delay: 0.6s">
+                <a href="#milagres" class="px-8 py-4 bg-gradient-to-r from-burgundy to-burgundy-dark border border-gold/50 text-gold font-cinzel tracking-wider hover:bg-gold hover:text-black transition-all duration-300 rounded-sm">
+                    EXPLORAR MILAGRES
+                </a>
+                <a href="#ciencia" class="px-8 py-4 border border-gold/30 text-gold-light font-cinzel tracking-wider hover:border-gold hover:bg-gold/10 transition-all duration-300 rounded-sm">
+                    EVIDÊNCIAS CIENTÍFICAS
+                </a>
+            </div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <i class="fas fa-chevron-down text-gold text-2xl"></i>
+        </div>
+    </section>
+
+    <!-- Introduction -->
+    <section class="py-20 px-4 bg-gradient-to-b from-black to-gray-900">
+        <div class="max-w-4xl mx-auto text-center scroll-reveal">
+            <h2 class="font-cinzel text-3xl md:text-4xl text-gold mb-6">A Presença Real</h2>
+            <p class="font-playfair text-lg text-gray-300 leading-relaxed mb-8">
+                Ao longo dos séculos, a Igreja Católica reconheceu mais de 100 milagres eucarísticos — eventos extraordinários 
+                onde a Santíssima Eucaristia manifestou-se de forma visível como carne e sangue humanos reais. 
+                Estes milagres servem como sinais tangíveis da verdade da Transubstanciação, confirmando que, 
+                na Santa Missa, o pão e o vinho se transformam verdadeiramente no Corpo e Sangue de Cristo.
+            </p>
+            <div class="grid grid-cols-3 gap-8 mt-12 text-center">
+                <div class="p-4">
+                    <div class="text-4xl font-cinzel text-gold mb-2">100+</div>
+                    <div class="text-sm text-gray-400 uppercase tracking-wider">Milagres Reconhecidos</div>
+                </div>
+                <div class="p-4">
+                    <div class="text-4xl font-cinzel text-gold mb-2">13</div>
+                    <div class="text-sm text-gray-400 uppercase tracking-wider">Séculos de História</div>
+                </div>
+                <div class="p-4">
+                    <div class="text-4xl font-cinzel text-gold mb-2">AB</div>
+                    <div class="text-sm text-gray-400 uppercase tracking-wider">Tipo Sanguíneo Encontrado</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Miracles Section -->
+    <section id="milagres" class="py-24 px-4 bg-black relative">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16 scroll-reveal">
+                <h2 class="font-cinzel text-4xl md:text-5xl text-gold mb-4">Principais Milagres</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-transparent via-gold to-transparent mx-auto"></div>
+            </div>
+
+            <!-- Tabs -->
+            <div class="flex flex-wrap justify-center gap-2 mb-12 scroll-reveal">
+                <button onclick="showMiracle('lanciano')" id="tab-lanciano" class="tab-active px-6 py-3 font-cinzel text-sm tracking-wider transition-all duration-300 rounded-t-lg">
+                    LANCIANO (750 d.C.)
+                </button>
+                <button onclick="showMiracle('bolsena')" id="tab-bolsena" class="px-6 py-3 font-cinzel text-sm tracking-wider text-gray-400 hover:text-gold transition-all duration-300 rounded-t-lg border-b border-gold/20">
+                    BOLSENA (1263)
+                </button>
+                <button onclick="showMiracle('legnica')" id="tab-legnica" class="px-6 py-3 font-cinzel text-sm tracking-wider text-gray-400 hover:text-gold transition-all duration-300 rounded-t-lg border-b border-gold/20">
+                    LEGNICA (2013)
+                </button>
+            </div>
+
+            <!-- Lanciano Content -->
+            <div id="content-lanciano" class="miracle-content scroll-reveal">
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <div class="space-y-6">
+                        <div class="inline-block px-4 py-1 border border-gold/30 rounded-full text-gold text-sm tracking-wider mb-2">
+                            O Mais Famoso
+                        </div>
+                        <h3 class="font-cinzel text-3xl md:text-4xl text-cream">Milagre de Lanciano</h3>
+                        <p class="text-gold font-cinzel text-lg">Itália, c. 750 d.C.</p>
+                        
+                        <div class="space-y-4 text-gray-300 leading-relaxed">
+                            <p>
+                                No século VIII, um monge basílio celebrava a Santa Missa no monastério de São Longino em Lanciano, Itália. 
+                                O padre, que tinha dúvidas sobre a Presença Real de Cristo na Eucaristia, pronunciou as palavras da consagração 
+                                ("Isto é o meu corpo", "Isto é o meu sangue") e testemunhou um evento extraordinário.
+                            </p>
+                            <p>
+                                O pão se transformou em carne viva e o vinho em sangue, que coagulou em cinco glóbulos — simbolizando 
+                                as cinco chagas de Cristo. O milagre ocorreu diante dos olhos do padre e dos fiéis presentes, 
+                                convertendo o sacerdote e todos os testemunhas.
+                            </p>
+                            <p>
+                                As relíquias são preservadas até hoje na Igreja de São Francisco em Lanciano, em um relicário de prata 
+                                e vidro datado de 1713. O tecido muscular foi identificado como miocárdio (músculo cardíaco), 
+                                e o sangue é do tipo AB — o mesmo encontrado no Sudário de Turim.
+                            </p>
+                        </div>
+
+                        <div class="glass-panel p-6 rounded-lg border-l-4 border-gold mt-6">
+                            <h4 class="font-cinzel text-gold mb-2">Dado Científico Notável</h4>
+                            <p class="text-sm text-gray-400">
+                                Em 1970, o Dr. Odoardo Linoli, professor de anatomia e histologia patológica, confirmou que o tecido 
+                                é de fato miocárdio humano fresco, sem sinais de decomposição ou conservantes, apesar de ter 
+                                mais de 1.200 anos.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <div class="image-reliquary rounded-lg overflow-hidden shadow-2xl shadow-gold/20">
+                            <img src="https://kimi-web-img.moonshot.cn/img/upload.wikimedia.org/bf6d46b9ac7dac40af6aa2cb8fd5b00c32571130.JPG" 
+                                 alt="Relicário do Milagre de Lanciano" 
+                                 class="w-full h-auto transform hover:scale-105 transition-transform duration-700">
+                        </div>
+                        <p class="text-center text-sm text-gray-500 italic">Relicário contendo as relíquias do Milagre de Lanciano</p>
+                        
+                        <div class="grid grid-cols-2 gap-4 mt-4">
+                            <div class="image-reliquary rounded-lg overflow-hidden">
+                                <img src="https://kimi-web-img.moonshot.cn/img/static1.squarespace.com/fe8c21a11961ef7c719f672198761fb703f4964e.jpg" 
+                                     alt="Detalhe das relíquias" 
+                                     class="w-full h-48 object-cover hover:scale-110 transition-transform duration-500">
+                            </div>
+                            <div class="image-reliquary rounded-lg overflow-hidden">
+                                <img src="https://kimi-web-img.moonshot.cn/img/101351.cdn.lojaquevende.com.br/a13cd0e6e20303ef4e6cd0d2fe215a11685fba08.jpeg" 
+                                     alt="Vista próxima do milagre" 
+                                     class="w-full h-48 object-cover hover:scale-110 transition-transform duration-500">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bolsena Content -->
+            <div id="content-bolsena" class="miracle-content hidden scroll-reveal">
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <div class="space-y-6">
+                        <div class="inline-block px-4 py-1 border border-gold/30 rounded-full text-gold text-sm tracking-wider mb-2">
+                            Origem do Corpus Christi
+                        </div>
+                        <h3 class="font-cinzel text-3xl md:text-4xl text-cream">Milagre de Bolsena</h3>
+                        <p class="text-gold font-cinzel text-lg">Itália, 1263 d.C.</p>
+                        
+                        <div class="space-y-4 text-gray-300 leading-relaxed">
+                            <p>
+                                No verão de 1263, um sacerdote boêmio chamado Pedro de Praga, que duvidava da transubstanciação, 
+                                celebrava a Missa na Basílica de Santa Cristina em Bolsena. No momento da consagração, 
+                                a hóstia começou a sangrar abundantemente sobre suas mãos e sobre o corporal (pano de linho do altar).
+                            </p>
+                            <p>
+                                O sangue formou a imagem do rosto de Jesus no pano sagrado. Aterrorizado, o padre interrompeu a Missa 
+                                e dirigiu-se imediatamente a Orvieto, onde o Papa Urbano IV residia, para confessar sua falta de fé 
+                                e relatar o prodígio.
+                            </p>
+                            <p>
+                                O Papa, comovido pelo milagre, instituiu a festa de Corpus Christi para toda a Igreja em 1264, 
+                                e encarregou São Tomás de Aquino de compor os textos litúrgicos, incluindo os hinos 
+                                "Tantum Ergo" e "O Salutaris Hostia".
+                            </p>
+                        </div>
+
+                        <div class="glass-panel p-6 rounded-lg border-l-4 border-gold mt-6">
+                            <h4 class="font-cinzel text-gold mb-2">Legado Litúrgico</h4>
+                            <p class="text-sm text-gray-400">
+                                O Corporal de Bolsena é preservado na Catedral de Orvieto, num relicário de esmalte criado por 
+                                Ugolino di Vieri em 1338. O milagre inspirou o famoso afresco de Rafael Sanzio "A Missa de Bolsena", 
+                                na Capela Stanza do Vaticano.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <div class="image-reliquary rounded-lg overflow-hidden shadow-2xl shadow-gold/20">
+                            <img src="https://kimi-web-img.moonshot.cn/img/upload.wikimedia.org/5d796fb46cb729858f93bba91ca45ffcfe891ccb.JPG" 
+                                 alt="Relicário do Corporal de Bolsena em Orvieto" 
+                                 class="w-full h-auto transform hover:scale-105 transition-transform duration-700">
+                        </div>
+                        <p class="text-center text-sm text-gray-500 italic">Relicário do Corporal de Bolsena na Catedral de Orvieto</p>
+                        
+                        <div class="grid grid-cols-2 gap-4 mt-4">
+                            <div class="image-reliquary rounded-lg overflow-hidden">
+                                <img src="https://kimi-web-img.moonshot.cn/img/webcatolicodejavier.org/8dcee6d693ff1e942b0bb1f7712408b53171b258.jpg" 
+                                     alt="Detalhe do relicário" 
+                                     class="w-full h-48 object-cover hover:scale-110 transition-transform duration-500">
+                            </div>
+                            <div class="image-reliquary rounded-lg overflow-hidden">
+                                <img src="https://kimi-web-img.moonshot.cn/img/publisher-ncreg.s3.us-east-2.amazonaws.com/d93e828249ad8c24d4ca978bbf74f071d959ead7.jpg" 
+                                     alt="Catedral de Orvieto" 
+                                     class="w-full h-48 object-cover hover:scale-110 transition-transform duration-500">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Legnica Content -->
+            <div id="content-legnica" class="miracle-content hidden scroll-reveal">
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <div class="space-y-6">
+                        <div class="inline-block px-4 py-1 border border-gold/30 rounded-full text-gold text-sm tracking-wider mb-2">
+                            Milagre Contemporâneo
+                        </div>
+                        <h3 class="font-cinzel text-3xl md:text-4xl text-cream">Milagre de Legnica</h3>
+                        <p class="text-gold font-cinzel text-lg">Polônia, 2013 d.C.</p>
+                        
+                        <div class="space-y-4 text-gray-300 leading-relaxed">
+                            <p>
+                                Em 25 de dezembro de 2013 (Natal), na Igreja de São Jacinto em Legnica, Polônia, uma hóstia consagrada caiu acidentalmente no chão durante a distribuição da Comunhão. 
+                                O padre Andrzej Ziombra recolheu a hóstia e a colocou em água destilada no sacrário, 
+                                conforme o Código de Direito Canônico, para que se dissolvesse naturalmente.
+                            </p>
+                            <p>
+                                Duas semanas depois, ao abrir o sacrário, os padres notaram que a hóstia não havia se dissolvido. 
+                                Pelo contrário, apresentava uma mancha vermelha escura cobrindo cerca de um quinto de sua superfície, 
+                                com aparência de tecido vivo.
+                            </p>
+                            <p>
+                                O Bispo estabeleceu uma comissão científica e teológica para investigar. Os testes de DNA confirmaram 
+                                que a substância era tecido cardíaco humano, com características de grande sofrimento, 
+                                compatíveis com as chagas de Cristo.
+                            </p>
+                        </div>
+
+                        <div class="glass-panel p-6 rounded-lg border-l-4 border-gold mt-6">
+                            <h4 class="font-cinzel text-gold mb-2">Contexto Histórico</h4>
+                            <p class="text-sm text-gray-400">
+                                Este é um dos milagres eucarísticos mais recentes e bem documentados da Igreja, ocorrido em pleno século XXI, demonstrando que Deus continua a confirmar a Presença Real 
+                                através de sinais visíveis quando a fé é enfraquecida.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <div class="image-reliquary rounded-lg overflow-hidden shadow-2xl shadow-gold/20 bg-gray-900 flex items-center justify-center h-96">
+                            <div class="text-center p-8">
+                                <i class="fas fa-church text-6xl text-gold/30 mb-4"></i>
+                                <p class="text-gold font-cinzel">Igreja de São Jacinto</p>
+                                <p class="text-gray-500 text-sm mt-2">Legnica, Polônia</p>
+                            </div>
+                        </div>
+                        <p class="text-center text-sm text-gray-500 italic">Local onde ocorreu o milagre contemporâneo em 2013</p>
+                        
+                        <div class="glass-panel p-6 rounded-lg mt-4">
+                            <h4 class="font-cinzel text-gold mb-3">Cronologia do Milagre</h4>
+                            <ul class="space-y-2 text-sm text-gray-400">
+                                <li class="flex items-start"><span class="text-gold mr-2">25/12/2013</span> - Queda acidental da hóstia</li>
+                                <li class="flex items-start"><span class="text-gold mr-2">08/01/2014</span> - Descoberta da transformação</li>
+                                <span class="text-gold mr-2">2016</span> - Início da investigação científica</li>
+                                <li class="flex items-start"><span class="text-gold mr-2">2019</span> - Confirmação episcopal do milagre</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scientific Evidence Section -->
+    <section id="ciencia" class="py-24 px-4 bg-gradient-to-b from-gray-900 to-black">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16 scroll-reveal">
+                <h2 class="font-cinzel text-4xl md:text-5xl text-gold mb-4">Evidências Científicas</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">Análises laboratoriais modernas confirmam a natureza inexplicável dos milagres eucarísticos</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="holy-card p-8 rounded-lg scroll-reveal">
+                    <div class="text-4xl text-gold mb-4"><i class="fas fa-microscope"></i></div>
+                    <h3 class="font-cinzel text-xl text-cream mb-3">Análise Histológica</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                        O Dr. Odoardo Linoli (1970-71) identificou o tecido de Lanciano como miocárdio (músculo cardíaco) e endocárdio em perfeito estado de conservação.
+                    </p>
+                    <div class="border-t border-gold/20 pt-4 mt-4">
+                        <span class="text-gold text-xs font-bold tracking-wider">TIPO: TECIDO CARDÍACO</span>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="holy-card p-8 rounded-lg scroll-reveal" style="transition-delay: 0.1s">
+                    <div class="text-4xl text-gold mb-4"><i class="fas fa-tint"></i></div>
+                    <h3 class="font-cinzel text-xl text-cream mb-3">Tipagem Sanguínea</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                        O sangue em todos os milagres analisados é do tipo AB positivo — o mesmo tipo encontrado 
+                        no Sudário de Turim e na Túnica de Argenteuil.
+                    </p>
+                    <div class="border-t border-gold/20 pt-4 mt-4">
+                        <span class="text-gold text-xs font-bold tracking-wider">TIPO SANGUÍNEO: AB</span>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="holy-card p-8 rounded-lg scroll-reveal" style="transition-delay: 0.2s">
+                    <div class="text-4xl text-gold mb-4"><i class="fas fa-clock"></i></div>
+                    <h3 class="font-cinzel text-xl text-cream mb-3">Preservação Inexplicável</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                        Apesar de terem mais de 1.200 anos, as amostras de Lanciano mostram sangue fresco 
+                        sem sinais de decomposição, coagulação ou uso de conservantes.
+                    </p>
+                    <div class="border-t border-gold/20 pt-4 mt-4">
+                        <span class="text-gold text-xs font-bold tracking-wider">IDADE: 1.200+ ANOS</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-16 glass-panel p-8 rounded-lg scroll-reveal">
+                <h3 class="font-cinzel text-2xl text-gold mb-6 text-center">Resultados dos Exames de 1970-1973</h3>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h4 class="text-cream font-bold mb-3 flex items-center"><i class="fas fa-check-circle text-gold mr-2"></i> Características da Carne:</h4>
+                        <ul class="space-y-2 text-gray-400 text-sm">
+                            <li>• Tecido miocárdico (coração) humano</li>
+                            <li>• Presença de endocárdio (revestimento interno)</li>
+                            <li>• Estrutura muscular íntegra</li>
+                            <li>• Ausência de agentes de conservação</li>
+                            <li>• Estado fresco (não mumificado)</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text- cream font-bold mb-3 flex items-center"><i class="fas fa-check-circle text-gold mr-2"></i> Características do Sangue:</h4>
+                        <ul class="space-y-2 text-gray-400 text-sm">
+                            <li>• Sangue humano tipo AB</li>
+                            <li>• Cinco glóbulos de pesos diferentes</li>
+                            <li>• Cada glóbulo pesa igual ao total dos cinco (teológico)</li>
+                            <li>• Proteínas sanguíneas normais em proporções equilibradas</li>
+                            <li>• Minerais presentes em proporções fisiológicas</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="mt-6 pt-6 border-t border-gold/20 text-center">
+                    <p class="text-gold/80 italic font-playfair">
+                        "A comissão declarou sem dúvida que é um tecido vivo, algo cientificamente inexplicável."
+                    </p>
+                    <p class="text-gray-500 text-sm mt-2">— Relatório da Organização Mundial da Saúde, 1973</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="galeria" class="py-24 px-4 bg-black">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16 scroll-reveal">
+                <h2 class="font-cinzel text-4xl md:text-5xl text-gold mb-4">Galeria de Relíquias</h2>
+                <p class="text-gray- 400">Imagens autênticas dos locais e relíquias milagrosas</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Image 1 -->
+                <div class="group relative overflow-hidden rounded-lg cursor-pointer scroll-reveal" onclick="openModal(this)">
+                    <img src="https://kimi-web-img.moonshot.cn/img/upload.wikimedia.org/bf6d46b9ac7dac40af6aa2cb8fd5b00c32571130.JPG" 
+                         alt="Relicário de Lanciano" 
+                         class="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                        <p class="text-gold font-cinzel text-sm">Relicário de Lanciano</p>
+                    </div>
+                </div>
+
+                <!-- Image 2 -->
+                <div class="group relative overflow-hidden rounded-lg cursor-pointer scroll-reveal" onclick="openModal(this)">
+                    <img src="https://kimi-web-img.moonshot.cn/img/upload.wikimedia.org/5d796fb46cb729858f93bba91ca45ffcfe891ccb.JPG" 
+                         alt="Relicário de Bolsena" 
+                         class="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                        <p class="text-gold font-cinzel text-sm">Relicário do Corporal de Bolsena</p>
+                    </div>
+                </div>
+
+                <!-- Image 3 -->
+                <div class="group relative overflow-hidden rounded-lg cursor-pointer scroll-reveal" onclick="openModal(this)">
+                    <img src="https://kimi-web-img.moonshot.cn/img/static1.squarespace.com/fe8c21a11961ef7c719f672198761fb703f4964e.jpg" 
+                         alt="Detalhe Lanciano" 
+                         class="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                        <p class="text-gold font-cinzel text-sm">Detalhe das Relíquias</p>
+                    </div>
+                </div>
+
+                <!-- Image 4 -->
+                <div class="group relative overflow-hidden rounded-lg cursor-pointer scroll-reveal" onclick="openModal(this)">
+                    <img src="https://kimi-web-img.moonshot.cn/img/publisher-ncreg.s3.us-east-2.amazonaws.com/d93e828249ad8c24d4ca978bbf74f071d959ead7.jpg" 
+                         alt="Catedral de Orvieto" 
+                         class="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                        <p class="text-gold font-cinzel text-sm">Catedral de Orvieto</p>
+                    </div>
+                </div>
+
+                <!-- Image 5 -->
+                <div class="group relative overflow-hidden rounded-lg cursor-pointer scroll-reveal" onclick="openModal(this)">
+                    <img src="https://kimi-web-img.moonshot.cn/img/webcatolicodejavier.org/8dcee6d693ff1e942b0bb1f7712408b53171b258.jpg" 
+                         alt="Relicário Bolsena Detalhe" 
+                         class="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                        <p class="text-gold font-cinzel text-sm">Detalhe do Relicário de Bolsena</p>
+                    </div>
+                </div>
+
+                <!-- Image 6 -->
+                <div class="group relative overflow-hidden rounded-lg cursor-pointer scroll-reveal" onclick="openModal(this)">
+                    <img src="https://kimi-web-img.moonshot.cn/img/www.catholicherald.com/ebdb941416a8f1dc6e2c56739dc6c028b5a73d6e.webp" 
+                         alt="Igreja de São Francisco" 
+                         class="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500"><div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                        <p class="text-gold font-cinzel text-sm">Igreja de São Francisco, Lanciano</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quote Section -->
+    <section class="py-20 px-4 bg-gradient-to-r from-burgundy-dark/30 via-black to-burgundy-dark/30 border-y border-gold/20">
+        <div class="max-w-4xl mx-auto text-center scroll-reveal">
+            <i class="fas fa-quote-left text-4xl text-gold/30 mb-6"></i>
+            <blockquote class="font-playfair text-2xl md:text-3xl text-cream italic leading-relaxed mb-6">
+                "O milagre eucarístico de Lanciano é talvez o mais famoso e conhecido de todos os milagres eucarísticos, 
+                não apenas porque é o mais antigo, mas porque foi objeto dos estudos científicos mais rigorosos."
+            </blockquote>
+            <cite class="text-gold font-cinzel tracking-wider not-italic">— National Catholic Register</cite>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black border-t border-gold/20 py-12 px-4">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid md:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <h4 class="font-cinzel text-gold text-lg mb-4">Santíssimo Sacramento</h4><p class="text-gray-500 text-sm leading-relaxed">
+                        Este site é dedicado à exposição dos milagres eucarísticos reconhecidos pela Igreja Católica 
+                        como sinais da Presença Real de Cristo na Eucaristia.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="font-cinzel text-gold text-lg mb-4">Links Importantes</h4>
+                    <ul class="space-y-2 text-sm text-gray-500">
+                        <li><a href="https://www.miracolieucaristici.org" target="_blank" class="hover:text-gold transition-colors">Associação dos Milagres Eucarísticos</a></li>
+                        <li><a href="https://www.vatican.va" target="_blank" class="hover:text-gold transition-colors">Vaticano</a></li>
+                        <li><a href="https://www.catholic.org" target="_blank" class="hover:text-gold transition-colors">Catholic Online</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-cinzel text-gold text-lg mb-4">Referências</h4>
+                    <ul class="space-y-2 text-sm text-gray-500">
+                        <li>• Igreja de S. Francisco, Lanciano</li>
+                        <li>• Catedral de Orvieto</li>
+                        <li>• Estudos do Dr. Odoardo Linoli (1970-71)</li>
+                        <li>• Encíclicas Papais sobre a Eucaristia</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gold/10 pt-8 text-center">
+                <p class="text-gray-600 text-sm">
+                    &copy; 2026 Milagres Eucarísticos. Criado para a glória de Deus e da Sua Igreja. 
+                    <br> - Pedro Alexandre.
+                </p>
+                <p class="text-gold/40 text-xs mt-2 font-cinzel">Ad Majorem Dei Gloriam</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Image Modal -->
+    <div id="imageModal" class="fixed inset-0 z-50 hidden bg-black/95 backdrop-blur-sm flex items-center justify-center p-4" onclick="closeModal()">
+        <div class="relative max-w-4xl w-full">
+            <button class="absolute -top-12 right-0 text-gold hover:text-white text-3xl transition-colors" onclick="closeModal()">
+                <i class="fas fa-times"></i>
+            </button>
+            <img id="modalImage" src="" alt="" class="w-full h-auto rounded-lg shadow-2xl shadow-gold/20">
+            <p id="modalCaption" class="text-center text-gold mt-4 font-cinzel"></p>
+        </div>
+    </div>
+
+    <script>
+        // Tab functionality
+        function showMiracle(miracle) {
+            // Hide all contents
+            document.querySelectorAll('.miracle-content').forEach(el => {
+                el.classList.add('hidden');
+            });
+            
+            // Show selected 
+            
+            document.getElementById('content-' + miracle).classList.remove('hidden');
+            
+            // Reset all tabs
+            document.querySelectorAll('[id^="tab-"]').forEach(tab => {
+                tab.classList.remove('tab-active');
+                tab.classList.add('text-gray-400', 'border-b', 'border-gold/20');
+            });
+            
+            // Activate selected tab
+            const activeTab = document.getElementById('tab-' + miracle);
+            activeTab.classList.add('tab-active');
+            activeTab.classList.remove('text-gray-400', 'border-b', 'border-gold/20');
+        }
+
+        // Mobile menu toggle
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Modal functionality
+        function openModal(element) {
+            const img = element.querySelector('img');
+            const caption = element.querySelector('p').innerText;
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            const modalCaption = document.getElementById('modalCaption');
+            
+            modalImg.src = img.src;
+            modalCaption.innerText = caption;modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('imageModal');
+            modal.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Scroll reveal animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.scroll-reveal').forEach((el) => observer.observe(el));
+
+        // Particle animation
+        function createParticles() {
+            const container = document.getElementById('particles');
+            const particleCount = 30;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                
+                const size = Math.random() * 4 + 1;
+                particle.style.width = size + 'px';
+                particle.style.height = size + 'px';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.opacity = Math.random() * 0.5 + 0.1;
+                
+                const duration = Math.random() * 20 + 10;
+                particle.style.animation = `float ${duration}s infinite ease-in-out`;
+                particle.style.animationDelay = Math.random() * 5 + 's';
+                
+                container.appendChild(particle);
+            }
+        }
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-black/95', 'shadow-lg', 'shadow-gold/5');
+            } else {
+                navbar.classList.remove('bg-black/95', 'shadow-lg', 'shadow-gold/5');
+            }
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            createParticles();
+            // Smooth scroll for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                        // Close mobile menu if open
+                        document.getElementById('mobile-menu').classList.add('hidden');
+                    }
+                });
+            });
+        });
+
+        // Keyboard navigation for modal
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeModal();
+        });
+    </script>
+</body>
+</html>
+
+                        
